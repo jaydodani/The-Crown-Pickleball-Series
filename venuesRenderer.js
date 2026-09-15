@@ -1,9 +1,10 @@
 /**
  * The Crown Pickleball Series - Venues Renderer
  * Renders venue list cards with photos, tournament hosting counts, facility specs and Google Maps links
+ * Directly synchronized with the central database store.
  */
 
-import { venuesData } from "./venuesData.js";
+import { dataStore } from "./dataStore.js";
 
 /**
  * Initializes and renders the Venues section
@@ -12,28 +13,52 @@ export function initVenuesModule() {
   const container = document.getElementById("venues-section");
   if (!container) return;
 
-  const venueCardsHtml = venuesData.map((venue, idx) => {
-    const hostedText = venue.tournamentsCount > 0 
-      ? `${venue.tournamentsCount} ${venue.tournamentsCount === 1 ? 'Tournament' : 'Tournaments'} Hosted`
+  renderVenuesList(container);
+
+  // Re-render when admin updates venues
+  dataStore.subscribe(() => {
+    if (container && container.style.display !== "none") {
+      renderVenuesList(container);
+    }
+  });
+}
+
+function renderVenuesList(container) {
+  const venues = dataStore.getVenues();
+  const allTournaments = dataStore.getTournaments();
+
+  const venueCardsHtml = venues.map((venue, idx) => {
+    const hostedTournaments = allTournaments.filter(t => (t.venue === venue.name || t.venueId === venue.id) && t.status === "COMPLETED");
+    const upcomingTournaments = allTournaments.filter(t => (t.venue === venue.name || t.venueId === venue.id) && t.status !== "COMPLETED");
+    const count = hostedTournaments.length;
+
+    const hostedText = count > 0 
+      ? `${count} ${count === 1 ? 'Tournament' : 'Tournaments'} Hosted`
       : 'Upcoming Host Venue';
 
-    const hostedTournamentsList = venue.tournamentsHosted.length > 0
-      ? venue.tournamentsHosted.map(t => `<span class="venue-tourney-pill">${t.name} (${t.date.split(",")[0]})</span>`).join("")
-      : (venue.upcomingTournaments.length > 0 ? `<span class="venue-tourney-pill upcoming">${venue.upcomingTournaments[0].name} (Next)</span>` : '');
+    const hostedTournamentsList = hostedTournaments.length > 0
+      ? hostedTournaments.map(t => `<span class="venue-tourney-pill">${t.name} (${t.date.split(",")[0]})</span>`).join("")
+      : (upcomingTournaments.length > 0 ? `<span class="venue-tourney-pill upcoming">${upcomingTournaments[0].name} (Next)</span>` : '<span style="font-size: 0.76rem; color: #94A3B8;">Host Venue</span>');
+
+    const courtsCountStr = venue.courts || (venue.courtsCount ? `${venue.courtsCount} Courts` : "6 Courts");
+    const surfaceStr = venue.surface || "Championship Acrylic Pro";
+    const envStr = venue.environment || "Outdoor Covered Floodlit";
+    const featuresList = venue.features || ["Stadium Lighting", "Pro Shop", "Player Lounge"];
+    const imageSrc = venue.image || "https://images.unsplash.com/photo-1599474924187-334a4ae5bd3c?auto=format&fit=crop&w=800&q=80";
 
     return `
       <article class="venue-card" id="${venue.id}" aria-labelledby="title-${venue.id}">
         <!-- Venue Media Visual -->
         <div class="venue-media-wrapper">
           <img 
-            src="${venue.image}" 
+            src="${imageSrc}" 
             alt="Courts at ${venue.name}" 
             class="venue-img" 
             loading="lazy"
           >
           <div class="venue-media-overlay">
             <span class="venue-index-tag">0${idx + 1}</span>
-            <span class="venue-courts-tag">${venue.courts.split(" ")[0]} Courts</span>
+            <span class="venue-courts-tag">${courtsCountStr.split(" ")[0]} Courts</span>
           </div>
         </div>
 
@@ -47,7 +72,7 @@ export function initVenuesModule() {
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                   <circle cx="12" cy="10" r="3"></circle>
                 </svg>
-                <span class="venue-city">${venue.city}</span>
+                <span class="venue-city">${venue.city || "Ahmedabad"}</span>
                 <span class="venue-dot-sep">&bull;</span>
                 <span class="venue-address">${venue.address}</span>
               </div>
@@ -55,7 +80,7 @@ export function initVenuesModule() {
 
             <!-- Tournaments Hosted Count Badge -->
             <div class="venue-badge-box">
-              <span class="venue-hosted-badge ${venue.tournamentsCount > 0 ? 'badge-hosted' : 'badge-upcoming'}">
+              <span class="venue-hosted-badge ${count > 0 ? 'badge-hosted' : 'badge-upcoming'}">
                 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5">
                   <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
                   <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
@@ -81,27 +106,27 @@ export function initVenuesModule() {
           <div class="venue-specs-grid">
             <div class="venue-spec-item">
               <span class="spec-label">Courts</span>
-              <span class="spec-value">${venue.courts}</span>
+              <span class="spec-value">${courtsCountStr}</span>
             </div>
             <div class="venue-spec-item">
               <span class="spec-label">Surface</span>
-              <span class="spec-value">${venue.surface}</span>
+              <span class="spec-value">${surfaceStr}</span>
             </div>
             <div class="venue-spec-item">
               <span class="spec-label">Setting</span>
-              <span class="spec-value">${venue.environment}</span>
+              <span class="spec-value">${envStr}</span>
             </div>
           </div>
 
           <!-- Features Tags -->
           <div class="venue-features-row">
-            ${venue.features.map(f => `<span class="feature-tag">${f}</span>`).join("")}
+            ${featuresList.map(f => `<span class="feature-tag">${f}</span>`).join("")}
           </div>
 
           <!-- Action Row with Direct Map Link -->
           <div class="venue-action-row">
             <a 
-              href="${venue.mapUrl}" 
+              href="${venue.mapUrl || 'https://maps.google.com'}" 
               target="_blank" 
               rel="noopener noreferrer" 
               class="venue-map-btn" 
@@ -132,7 +157,7 @@ export function initVenuesModule() {
           <h2 class="stat-title">SERIES VENUES</h2>
           <p class="stat-desc">Official championship arenas, academies and tournament courts</p>
         </div>
-        <span class="stat-count-pill">${venuesData.length} Venues</span>
+        <span class="stat-count-pill">${venues.length} Venues</span>
       </div>
 
       <!-- Venues Cards List -->
@@ -142,3 +167,4 @@ export function initVenuesModule() {
     </div>
   `;
 }
+

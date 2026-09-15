@@ -4,11 +4,38 @@
  */
 
 import { statsTeams, tournamentHistory, STAT_CATEGORIES } from "./statsData.js";
+import { dataStore } from "./dataStore.js";
 
 // Active State
 let currentCategoryKey = "STANDINGS";
 let currentStatId = "win-percentage";
 let selectedTournamentFilter = "all";
+
+function getEffectiveTournamentHistory() {
+  const stored = dataStore.getTournaments().filter(t => t.status === "COMPLETED");
+  if (!stored || stored.length === 0) return tournamentHistory;
+  return stored.map(t => {
+    const shortName = t.name.split("•")[0].trim();
+    const staticTh = tournamentHistory.find(th => th.name.toLowerCase() === shortName.toLowerCase() || th.name.toLowerCase() === t.name.toLowerCase());
+    return {
+      tournamentNumber: t.number,
+      name: shortName,
+      fullName: t.name,
+      location: t.venue,
+      winner: t.winner || (staticTh?.winner || "Champions"),
+      runnerUp: t.runnerUp || (staticTh?.runnerUp || "Finalists"),
+      score: t.score || (staticTh?.score || "11-9, 11-8"),
+      date: t.date,
+      mvp: typeof t.mvp === "string" ? {
+        name: t.mvp || (staticTh?.mvp?.name || "Tournament MVP"),
+        team: t.winner || "Champions",
+        matches: staticTh?.mvp?.matches || 5,
+        wins: staticTh?.mvp?.wins || 4,
+        points: staticTh?.mvp?.points || 50
+      } : (staticTh?.mvp || { name: "Tournament MVP", team: "Champions", matches: 5, wins: 4, points: 50 })
+    };
+  });
+}
 
 /**
  * Initializes the entire Stats view
@@ -19,12 +46,29 @@ export function initStatsModule() {
 
   renderStatsLayout(container);
   bindFilterEvents();
+
+  // Live sync with central data store
+  dataStore.subscribe(() => {
+    if (container && container.style.display !== "none") {
+      renderStatsLayout(container);
+      bindFilterEvents();
+    }
+  });
 }
 
 /**
  * Renders the top-level stats scaffolding
  */
 function renderStatsLayout(container) {
+  const allTourneys = dataStore.getTournaments();
+  const optionsHtml = `
+    <option value="all" ${selectedTournamentFilter === 'all' ? 'selected' : ''}>All Tournaments</option>
+    ${allTourneys.map(t => {
+      const shortName = t.name.split("•")[0].trim();
+      return `<option value="${shortName}" ${selectedTournamentFilter === shortName ? 'selected' : ''}>${t.name}</option>`;
+    }).join("")}
+  `;
+
   container.innerHTML = `
     <!-- Stats Header Section -->
     <section class="stats-header-section">
@@ -38,11 +82,7 @@ function renderStatsLayout(container) {
         <div class="custom-select-wrapper">
           <label for="filter-tournament-select" class="sr-only">Filter by Tournament</label>
           <select id="filter-tournament-select" class="custom-select" aria-label="Filter by tournament">
-            <option value="all" ${selectedTournamentFilter === 'all' ? 'selected' : ''}>All Tournaments</option>
-            <option value="Tournament 4" ${selectedTournamentFilter === 'Tournament 4' ? 'selected' : ''}>Tournament 4</option>
-            <option value="Tournament 3" ${selectedTournamentFilter === 'Tournament 3' ? 'selected' : ''}>Tournament 3</option>
-            <option value="Tournament 2" ${selectedTournamentFilter === 'Tournament 2' ? 'selected' : ''}>Tournament 2</option>
-            <option value="Tournament 1" ${selectedTournamentFilter === 'Tournament 1' ? 'selected' : ''}>Tournament 1</option>
+            ${optionsHtml}
           </select>
           <svg class="select-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
@@ -301,9 +341,10 @@ function renderStandardRankingTable(container, statConfig) {
  * Visual View: Tournament Winners
  */
 function renderTournamentWinnersView(container, statConfig) {
+  const historyList = getEffectiveTournamentHistory();
   const activeTournaments = selectedTournamentFilter === "all"
-    ? tournamentHistory
-    : tournamentHistory.filter(th => th.name === selectedTournamentFilter);
+    ? historyList
+    : historyList.filter(th => th.name.toLowerCase() === selectedTournamentFilter.toLowerCase() || (th.fullName && th.fullName.toLowerCase().includes(selectedTournamentFilter.toLowerCase())));
 
   const cardsHtml = activeTournaments.map(th => `
     <div class="trophy-timeline-card">
@@ -313,7 +354,7 @@ function renderTournamentWinnersView(container, statConfig) {
       </div>
       <div class="trophy-info-col">
         <span class="tournament-date">${th.date} &bull; ${th.location}</span>
-        <h4 class="tournament-card-name">${th.name}</h4>
+        <h4 class="tournament-card-name">${th.fullName || th.name}</h4>
         <div class="tournament-winner-box">
           <span class="trophy-tag">CHAMPION</span>
           <span class="winner-team-name">${th.winner}</span>
@@ -346,9 +387,10 @@ function renderTournamentWinnersView(container, statConfig) {
  * Visual View: Tournament Runners-Up
  */
 function renderTournamentRunnersUpView(container, statConfig) {
+  const historyList = getEffectiveTournamentHistory();
   const activeTournaments = selectedTournamentFilter === "all"
-    ? tournamentHistory
-    : tournamentHistory.filter(th => th.name === selectedTournamentFilter);
+    ? historyList
+    : historyList.filter(th => th.name.toLowerCase() === selectedTournamentFilter.toLowerCase() || (th.fullName && th.fullName.toLowerCase().includes(selectedTournamentFilter.toLowerCase())));
 
   const cardsHtml = activeTournaments.map(th => `
     <div class="trophy-timeline-card runnerup-style">
@@ -358,7 +400,7 @@ function renderTournamentRunnersUpView(container, statConfig) {
       </div>
       <div class="trophy-info-col">
         <span class="tournament-date">${th.date} &bull; ${th.location}</span>
-        <h4 class="tournament-card-name">${th.name}</h4>
+        <h4 class="tournament-card-name">${th.fullName || th.name}</h4>
         <div class="tournament-winner-box silver-box">
           <span class="trophy-tag silver-tag">RUNNER-UP</span>
           <span class="winner-team-name">${th.runnerUp}</span>
@@ -391,9 +433,10 @@ function renderTournamentRunnersUpView(container, statConfig) {
  * Visual View: Tournament MVP
  */
 function renderTournamentMvpView(container, statConfig) {
+  const historyList = getEffectiveTournamentHistory();
   const activeTournaments = selectedTournamentFilter === "all"
-    ? tournamentHistory
-    : tournamentHistory.filter(th => th.name === selectedTournamentFilter);
+    ? historyList
+    : historyList.filter(th => th.name.toLowerCase() === selectedTournamentFilter.toLowerCase() || (th.fullName && th.fullName.toLowerCase().includes(selectedTournamentFilter.toLowerCase())));
 
   const mvpCardsHtml = activeTournaments.map(th => `
     <div class="mvp-showcase-card">

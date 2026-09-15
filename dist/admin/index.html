@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard • The Racquet Club Ahmedabad Pickleball Series</title>
+  <!-- Modern Typography Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/racquet-club-logo.png">
+  <script type="module" crossorigin src="/assets/admin-C0aI2M8r.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/dataStore-CekUmtw6.js">
+  <link rel="stylesheet" crossorigin href="/assets/admin-Da8guGwf.css">
+</head>
+<body class="admin-body">
+  <div class="admin-layout" id="admin-app">
+    
+    <!-- LEFT SIDEBAR -->
+    <aside class="admin-sidebar" id="admin-sidebar">
+      <!-- Sidebar Brand Header -->
+      <div class="sidebar-brand-header">
+        <a href="#dashboard" class="sidebar-brand-link" id="brand-home-link">
+          <div class="sidebar-logo-wrap">
+            <img src="/racquet-club-logo.png" alt="The Racquet Club Logo" class="sidebar-logo-img">
+          </div>
+          <div class="sidebar-brand-text">
+            <span class="brand-title">THE RACQUET CLUB</span>
+            <span class="brand-subtitle">PICKLEBALL SERIES</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Navigation Menu -->
+      <nav class="sidebar-nav" aria-label="Admin Navigation">
+        
+        <!-- SECTION: OVERVIEW -->
+        <div class="nav-section-group">
+          <span class="nav-section-label">OVERVIEW</span>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="#dashboard" class="nav-link active" data-view="dashboard">
+                <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span class="nav-text">Dashboard</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- SECTION: TOURNAMENTS -->
+        <div class="nav-section-group">
+          <span class="nav-section-label">TOURNAMENT MANAGEMENT</span>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="#tournaments" class="nav-link" data-view="tournaments">
+                <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                  <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                  <path d="M4 22h16"></path>
+                  <path d="M10 14.66V17c0 .55-.45 1-1 1H7"></path>
+                  <path d="M14 14.66V17c0 .55.45 1 1 1h2"></path>
+                  <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                </svg>
+                <span class="nav-text">Tournaments</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#add-tournament" class="nav-link" data-view="add-tournament">
+                <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="16"></line>
+                  <line x1="8" y1="12" x2="16" y2="12"></line>
+                </svg>
+                <span class="nav-text">Add Tournament</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#tournament-matches" class="nav-link" data-view="tournament-matches">
+                <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                </svg>
+                <span class="nav-text">Tournament Matches</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#venues" class="nav-link" data-view="venues">
+                <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span class="nav-text">Venues</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#categories" class="nav-link" data-view="categories">
+                <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="8" y1="6" x2="21" y2="6"></line>
+                  <line x1="8" y1="12" x2="21" y2="12"></line>
+                  <line x1="8" y1="18" x2="21" y2="18"></line>
+                  <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                  <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                  <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                </svg>
+                <span class="nav-text">Categories</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- SECTION: PLAYERS & TEAMS -->
+        <div class="nav-section-group">
+          <span class="nav-section-label">PLAYERS & TEAMS</span>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="#players" class="nav-link" data-view="players">
+                <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span class="nav-text">Players</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#doubles-teams" class="nav-link" data-view="doubles-teams">
+                <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                <span class="nav-text">Doubles Teams</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#registrations" class="nav-link" data-view="registrations">
+                <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                <span class="nav-text">Registrations</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- SECTION: COMPETITION -->
+        <div class="nav-section-group">
+          <span class="nav-section-label">COMPETITION</span>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="#matches" class="nav-link" data-view="matches">
+                <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polygon points="12 8 8 12 12 16 12 8"></polygon>
+                  <polygon points="12 8 16 12 12 16 12 8"></polygon>
+                </svg>
+                <span class="nav-text">Matches</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#results" class="nav-link" data-view="results">
+                <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 11 12 14 22 4"></polyline>
+                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                </svg>
+                <span class="nav-text">Results</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#points-table" class="nav-link" data-view="points-table">
+                <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="3" y1="9" x2="21" y2="9"></line>
+                  <line x1="9" y1="21" x2="9" y2="9"></line>
+                </svg>
+                <span class="nav-text">Points Table</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#rankings" class="nav-link" data-view="rankings">
+                <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="20" x2="18" y2="10"></line>
+                  <line x1="12" y1="20" x2="12" y2="4"></line>
+                  <line x1="6" y1="20" x2="6" y2="14"></line>
+                </svg>
+                <span class="nav-text">Rankings</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- SECTION: STATISTICS -->
+        <div class="nav-section-group">
+          <span class="nav-section-label">STATISTICS</span>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="#stats" class="nav-link" data-view="stats">
+                <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+                  <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
+                </svg>
+                <span class="nav-text">Stats</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#tournament-records" class="nav-link" data-view="tournament-records">
+                <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="8" r="7"></circle>
+                  <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                </svg>
+                <span class="nav-text">Tournament Records</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#player-records" class="nav-link" data-view="player-records">
+                <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="8.5" cy="7" r="4"></circle>
+                  <polyline points="17 11 19 13 23 9"></polyline>
+                </svg>
+                <span class="nav-text">Player Records</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- SECTION: CONTENT -->
+        <div class="nav-section-group">
+          <span class="nav-section-label">CONTENT</span>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="#updates" class="nav-link" data-view="updates">
+                <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                  <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+                <span class="nav-text">Updates & News</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#community" class="nav-link" data-view="community">
+                <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                <span class="nav-text">Community</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- SECTION: SYSTEM -->
+        <div class="nav-section-group">
+          <span class="nav-section-label">SYSTEM</span>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="#settings" class="nav-link" data-view="settings">
+                <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+                <span class="nav-text">Settings</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#admin-users" class="nav-link" data-view="admin-users">
+                <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span class="nav-text">Admin Users</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Sidebar Bottom Action -->
+      <div class="sidebar-footer">
+        <a href="/" class="sidebar-action-btn view-site-btn" target="_blank" title="Open public championship website">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+          <span>View Public Site</span>
+        </a>
+        <button class="sidebar-action-btn logout-btn" id="btn-admin-logout" title="Exit admin session">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+          <span>Log Out</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT AREA -->
+    <div class="admin-main-wrapper">
+      
+      <!-- TOP ADMIN BAR -->
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button class="sidebar-toggle-btn" id="sidebar-toggle" aria-label="Toggle Sidebar">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+          <div class="topbar-title-group">
+            <h1 class="topbar-page-title" id="page-title">Dashboard</h1>
+            <span class="topbar-breadcrumb" id="page-breadcrumb">Pickleball Series • Overview</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <!-- Notification Bell -->
+          <div class="topbar-action-item">
+            <button class="icon-circle-btn" id="notif-btn" aria-label="Notifications" title="System Notifications">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+              </svg>
+              <span class="notif-badge">3</span>
+            </button>
+          </div>
+
+          <!-- Quick Public Link -->
+          <a href="/" class="topbar-pill-link" target="_blank">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+            <span>Live Website</span>
+          </a>
+
+          <!-- Administrator Profile Pill -->
+          <div class="admin-profile-pill">
+            <div class="admin-avatar-wrap">
+              <img src="/racquet-club-logo.png" alt="Admin Avatar" class="admin-avatar-img">
+              <span class="status-indicator-dot online"></span>
+            </div>
+            <div class="admin-profile-meta">
+              <strong class="admin-name">Administrator</strong>
+              <span class="admin-role">Super Admin</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- DYNAMIC CONTENT MOUNT -->
+      <main class="admin-content-area" id="admin-view-container">
+        <!-- Rendered dynamically by admin.js based on hash route -->
+      </main>
+
+    </div>
+
+    <!-- REUSABLE MODAL CONTAINER -->
+    <div class="admin-modal-backdrop" id="admin-modal-backdrop" aria-hidden="true">
+      <div class="admin-modal-card" id="admin-modal-card" role="dialog" aria-modal="true">
+        <!-- Injected dynamically by modal helper -->
+      </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  </div>
+
+  <!-- Admin Controller -->
+</body>
+</html>

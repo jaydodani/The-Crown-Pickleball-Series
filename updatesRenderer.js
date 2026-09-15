@@ -4,9 +4,45 @@
  */
 
 import { upcomingRegistrations, seriesAnnouncements } from "./updatesData.js";
+import { dataStore } from "./dataStore.js";
 
-// Local state for dynamic slots update
-let registrationsState = [...upcomingRegistrations];
+function getEffectiveRegistrations() {
+  const upcomingTourneys = dataStore.getTournaments().filter(t => t.status === "UPCOMING");
+
+  return upcomingTourneys.map(t => {
+    const staticReg = upcomingRegistrations.find(r => r.id === `reg-${t.id}` || r.name.toLowerCase().includes(t.name.toLowerCase()) || t.name.toLowerCase().includes(r.name.toLowerCase()));
+
+    const statusType = t.registrationStatus === "Open" ? "open" : (t.registrationStatus === "Coming Soon" ? "soon" : "invitational");
+    const statusBadge = t.registrationStatus === "Open" ? "REGISTRATIONS OPEN" : (t.registrationStatus === "Coming Soon" ? "COMING SOON" : "INVITATIONAL ONLY");
+
+    const maxTeams = t.maxTeams || 24;
+    const registeredTeams = t.registeredTeams || 0;
+    const remaining = Math.max(0, maxTeams - registeredTeams);
+    const percentage = Math.round((registeredTeams / maxTeams) * 100);
+
+    return {
+      id: staticReg ? staticReg.id : `reg-${t.id}`,
+      tournamentId: t.id,
+      tournamentNumber: t.number,
+      name: t.name,
+      statusBadge: staticReg?.statusBadge || statusBadge,
+      statusType: staticReg?.statusType || statusType,
+      dates: t.date,
+      venueName: t.venue,
+      location: staticReg?.location || "Ahmedabad, Gujarat",
+      deadline: staticReg?.deadline || "1 week prior to event",
+      entryFee: staticReg?.entryFee || "₹1,500 per team",
+      categories: staticReg?.categories || (Array.isArray(t.category) ? t.category : [t.category || "Intermediate Doubles"]),
+      pointsReward: t.pointsAwarded || "150 Series Championship Points",
+      prizePool: staticReg?.prizePool || "₹50,000 Prize Purse + Official Crown Trophies",
+      slotsRemaining: staticReg?.slotsRemaining || `${remaining} Slots Left (${registeredTeams}/${maxTeams} Registered)`,
+      slotsPercentage: staticReg ? staticReg.slotsPercentage : percentage,
+      registrationUrl: staticReg?.registrationUrl || "https://forms.gle/the-crown-pickleball",
+      directorContact: staticReg?.directorContact || "+91 98250 12345",
+      description: t.description || staticReg?.description || `Official tournament fixture at ${t.venue}.`
+    };
+  });
+}
 
 /**
  * Initializes and renders the Updates tab
@@ -17,9 +53,18 @@ export function initUpdatesModule() {
 
   renderUpdatesView(container);
   bindUpdatesEvents(container);
+
+  // Live sync with central data store
+  dataStore.subscribe(() => {
+    if (container && container.style.display !== "none") {
+      renderUpdatesView(container);
+      bindUpdatesEvents(container);
+    }
+  });
 }
 
 function renderUpdatesView(container) {
+  const registrationsState = getEffectiveRegistrations();
   const cardsHtml = registrationsState.map(reg => {
     const isOpen = reg.statusType === "open";
     const isSoon = reg.statusType === "soon";
@@ -349,7 +394,10 @@ function bindUpdatesEvents(container) {
   // Open modal buttons
   container.querySelectorAll("[data-open-modal]").forEach(btn => {
     btn.addEventListener("click", () => {
+      const tourneyId = btn.getAttribute("data-open-modal");
       const tourneyName = btn.getAttribute("data-tourney-name");
+      const hiddenInput = document.getElementById("form-tourney-id");
+      if (hiddenInput && tourneyId) hiddenInput.value = tourneyId;
       openModal(tourneyName);
     });
   });
@@ -379,13 +427,27 @@ function bindUpdatesEvents(container) {
       const p1 = document.getElementById("input-player-1")?.value.trim() || "Player 1";
       const p2 = document.getElementById("input-player-2")?.value.trim() || "Player 2";
       const category = document.getElementById("select-category")?.value || "Premier Doubles";
+      const phone = document.getElementById("input-phone")?.value.trim() || "";
+      const tourneyId = document.getElementById("form-tourney-id")?.value || "reg-tourney-5";
 
-      // Update state: Increment slot count
-      const t5 = registrationsState.find(r => r.id === "reg-tourney-5");
-      if (t5) {
-        t5.slotsRemaining = "7 Slots Left (25/32 Registered)";
-        t5.slotsPercentage = 78;
+      // Match tournament in dataStore
+      const allTourneys = dataStore.getTournaments();
+      const matched = allTourneys.find(t => t.id === tourneyId || `reg-${t.id}` === tourneyId || t.name.includes(tourneyId));
+      if (matched) {
+        dataStore.updateTournament(matched.id, {
+          registeredTeams: Math.min(matched.maxTeams || 24, (matched.registeredTeams || 0) + 1)
+        });
       }
+
+      // Add registration to central dataStore
+      dataStore.addRegistration({
+        teamName,
+        player1: p1,
+        player2: p2,
+        category,
+        tournamentName: matched ? matched.name : "Tournament 5",
+        phone
+      });
 
       closeModal();
       renderUpdatesView(container);

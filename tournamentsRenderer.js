@@ -4,7 +4,7 @@
  * Directly listed without filter tabs and without "100 points awarded" tag
  */
 
-import { tournamentsData } from "./tournamentsData.js";
+import { dataStore } from "./dataStore.js";
 
 /**
  * Initializes and renders the Tournaments schedule section
@@ -14,10 +14,18 @@ export function initTournamentsModule() {
   if (!container) return;
 
   renderTournamentsView(container);
+
+  // Live sync with central data store
+  dataStore.subscribe(() => {
+    if (container && container.style.display !== "none") {
+      renderTournamentsView(container);
+    }
+  });
 }
 
 function renderTournamentsView(container) {
-  const cardsHtml = tournamentsData.map(t => {
+  const tournaments = dataStore.getTournaments();
+  const cardsHtml = tournaments.map(t => {
     const isCompleted = t.status === "COMPLETED";
 
     const detailBlockHtml = isCompleted ? `
@@ -120,7 +128,7 @@ function renderTournamentsView(container) {
           <h2 class="stat-title">TOURNAMENT SCHEDULE &amp; RESULTS</h2>
           <p class="stat-desc">Completed championships and upcoming official tournament stops</p>
         </div>
-        <span class="stat-count-pill">${tournamentsData.length} Tournaments</span>
+        <span class="stat-count-pill">${tournaments.length} Tournaments</span>
       </div>
 
       <!-- Direct Tournaments Grid (No filter tabs) -->

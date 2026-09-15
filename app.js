@@ -8,6 +8,7 @@ import { initTournamentsModule } from "./tournamentsRenderer.js";
 import { initVenuesModule } from "./venuesRenderer.js";
 import { initUpdatesModule } from "./updatesRenderer.js";
 import { initHeaderModule } from "./headerRenderer.js";
+import { dataStore } from "./dataStore.js";
 
 export const tournamentData = [
   {
@@ -446,11 +447,12 @@ let searchQuery = "";
  * Returns filtered player list based on active search
  */
 function getFilteredData() {
-  if (!searchQuery) return tournamentData;
+  const currentData = dataStore.getPointsTable();
+  if (!searchQuery) return currentData;
   const q = searchQuery.toLowerCase();
-  return tournamentData.filter(player => 
+  return currentData.filter(player => 
     player.name.toLowerCase().includes(q) ||
-    player.pastMatches.some(m => m.opponent.toLowerCase().includes(q))
+    (player.pastMatches && player.pastMatches.some(m => m.opponent.toLowerCase().includes(q)))
   );
 }
 
@@ -476,10 +478,11 @@ export function renderPointsTable() {
 
   // Update summary count text
   if (countBadge) {
+    const totalPlayers = dataStore.getPointsTable().length;
     if (searchQuery) {
-      countBadge.textContent = `Found ${totalCount} of ${tournamentData.length} Players`;
+      countBadge.textContent = `Found ${totalCount} of ${totalPlayers} Players`;
     } else {
-      countBadge.textContent = `Standings • ${tournamentData.length} Players`;
+      countBadge.textContent = `Standings • ${totalPlayers} Players`;
     }
   }
 
@@ -802,7 +805,10 @@ export function initNavigation() {
 
     hideAllSections();
 
-    if (target === "stats") {
+    if (target === "admin") {
+      window.location.href = "/admin";
+      return;
+    } else if (target === "stats") {
       if (statsSection) {
         statsSection.style.display = "block";
         initStatsModule();
@@ -856,5 +862,10 @@ document.addEventListener("DOMContentLoaded", () => {
   renderPointsTable();
   initFilters();
   initNavigation();
+
+  // Reactive subscription: when admin saves a match or tournament, update points table live!
+  dataStore.subscribe(() => {
+    renderPointsTable();
+  });
 });
 

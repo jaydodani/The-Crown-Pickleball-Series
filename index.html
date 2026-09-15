@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Crown Series - Pickleball Championship | The Racquet Club Ahmedabad</title>
+  <meta name="description"
+    content="Official points table, tournament schedule, community network, and series updates for The Crown Pickleball Championship by The Racquet Club Ahmedabad.">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+
+  <!-- Full-Width Sticky Horizontal Header Branding Strip -->
+  <header class="site-header" id="site-header" role="banner">
+    <div class="site-header-inner">
+
+      <!-- LEFT: BRANDING ZONE -->
+      <div class="site-header-branding">
+        <a href="#points-tables" class="header-brand-link" aria-label="The Racquet Club Ahmedabad - The Crown Series">
+          <div class="header-logo-wrap">
+            <img src="/racquet-club-logo.png" alt="The Racquet Club Ahmedabad" class="header-logo-img">
+          </div>
+          <div class="header-brand-divider" aria-hidden="true"></div>
+          <div class="header-club-meta">
+            <span class="club-brand-title">THE RACQUET CLUB</span>
+            <span class="club-brand-location">AHMEDABAD</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- RIGHT: THREE MAIN NAVIGATION ITEMS -->
+      <nav class="site-header-nav" id="site-header-nav" aria-label="Primary Navigation">
+        <ul class="header-nav-list" role="menubar">
+
+          <!-- 1. TOURNAMENTS DROPDOWN -->
+          <li class="header-nav-item has-dropdown" data-dropdown="tournaments" role="none">
+            <button type="button" class="header-nav-btn" id="nav-btn-tournaments" aria-haspopup="true"
+              aria-expanded="false" role="menuitem">
+              <span class="nav-btn-text">TOURNAMENTS</span>
+              <svg class="nav-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+                stroke-width="2.5" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+
+            <!-- Refined Menu Panel -->
+            <div class="header-dropdown-panel" id="dropdown-tournaments" aria-labelledby="nav-btn-tournaments"
+              role="menu">
+              <div class="dropdown-header-bar">
+                <span class="dropdown-header-sup">CHAMPIONSHIP CIRCUIT</span>
+                <span class="dropdown-header-title">TOURNAMENTS</span>
+              </div>
+              <div class="dropdown-content-grid">
+                <div class="dropdown-col">
+                  <span class="dropdown-group-kicker">STANDINGS &amp; ANALYTICS</span>
+                  <a href="#points-tables" class="dropdown-link-item" data-nav-target="points-tables" role="menuitem">
+                    <div class="link-item-text">
+                      <strong class="item-primary-title">Points Table</strong>
+                      <span class="item-secondary-desc">Official player rankings, game records &amp; standings</span>
+                    </div>
+                    <svg class="item-nav-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none"
+                      stroke="currentColor" stroke-width="2">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                  </a>
+
+                  <a href="#stats" class="dropdown-link-item" data-nav-target="stats" role="menuitem">
+                    <div class="link-item-text">
+                      <strong class="item-primary-title">Series Stats</strong>
+                      <span class="item-secondary-desc">Player &amp; team performance records and leaders</span>
+                    </div>
+                    <svg class="item-nav-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none"
+                      stroke="currentColor" stroke-width="2">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                  </a>
+                </div>
+
+                <div class="dropdown-col">
+                  <span class="dropdown-group-kicker">FIXTURES &amp; SCHEDULE</span>
+                  <a href="#tournaments" class="dropdown-link-item" data-nav-target="tournaments" role="menuitem">
+                    <div class="link-item-text">
+                      <strong class="item-primary-title">Tournament Overview</strong>
+                      <span class="item-secondary-desc">Chronological season schedule &amp; tournament guide</span>
+                    </div>
+                    <svg class="item-nav-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none"
+                      stroke="currentColor" stroke-width="2">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                  </a>
+
+                  <a href="#updates" class="dropdown-link-item" data-nav-target="updates" role="menuitem">
+                    <div class="link-item-text">
+                      <strong class="item-primary-title">Upcoming Tournaments</strong>
+                      <span class="item-secondary-desc">Autumn Championship (Stop 5) open registration</span>
+                    </div>
+                    <svg class="item-nav-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none"
+                      stroke="currentColor" stroke-width="2">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                  </a>
+
+                  <a href="#tournaments" class="dropdown-link-item" data-nav-target="tournaments" role="menuitem">
+                    <div class="link-item-text">
+                      <strong class="item-primary-title">Past Tournaments</strong>
+                      <span class="item-secondary-desc">Completed championships (1–4) &amp; trophy archives</span>
+                    </div>
+                    <svg class="item-nav-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none"
+                      stroke="currentColor" stroke-width="2">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                  </a>
+
+                  <a href="#venues" class="dropdown-link-item" data-nav-target="venues" role="menuitem">
+                    <div class="link-item-text">
+                      <strong class="item-primary-title">Official Venues</strong>
+                      <span class="item-secondary-desc">Bainbridge, Yu Pikkle, Shaishya, Dinkers</span>
+                    </div>
+                    <svg class="item-nav-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none"
+                      stroke="currentColor" stroke-width="2">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- 2. COMMUNITY DROPDOWN -->
+          <li class="header-nav-item has-dropdown" data-dropdown="community" role="none">
+            <button type="button" class="header-nav-btn" id="nav-btn-community" aria-haspopup="true"
+              aria-expanded="false" role="menuitem">
+              <span class="nav-btn-text">COMMUNITY</span>
+              <svg class="nav-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+                stroke-width="2.5" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+
+            <!-- Refined Menu Panel -->
+            <div class="header-dropdown-panel" id="dropdown-community" aria-labelledby="nav-btn-community" role="menu">
+              <div class="dropdown-header-bar">
+                <span class="dropdown-header-sup">RACQUET CLUB NETWORK</span>
+                <span class="dropdown-header-title">COMMUNITY</span>
+              </div>
+              <div class="dropdown-content-grid">
+                <div class="dropdown-col">
+                  <span class="dropdown-group-kicker">NETWORK &amp; MEMBERS</span>
+                  <button type="button" class="dropdown-link-item community-dialog-btn" data-community-tab="overview"
+                    role="menuitem">
+                    <div class="link-item-text">
+                      <strong class="item-primary-title">Community Overview</strong>
+                      <span class="item-secondary-desc">The Racquet Club sports ecosystem in Ahmedabad</span>
+                    </div>
+                    <svg class="item-nav-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none"
+                      stroke="currentColor" stroke-width="2">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                  </button>
+
+                  <button type="button" class="dropdown-link-item community-dialog-btn" data-community-tab="players"
+                    role="menuitem">
+                    <div class="link-item-text">
+                      <strong class="item-primary-title">Players &amp; Teams</strong>
+                      <span class="item-secondary-desc">Roster of 24 active series contenders</span>
+                    </div>
+                    <svg class="item-nav-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none"
+                      stroke="currentColor" stroke-width="2">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                  </button>
+
+                  <a href="#venues" class="dropdown-link-item" data-nav-target="venues" role="menuitem">
+                    <div class="link-item-text">
+                      <strong class="item-primary-title">Clubs &amp; Arenas</strong>
+                      <span class="item-secondary-desc">Host arenas and training centers across Gujarat</span>
+                    </div>
+                    <svg class="item-nav-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none"
+                      stroke="currentColor" stroke-width="2">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                  </a>
+                </div>
+
+                <div class="dropdown-col">
+                  <span class="dropdown-group-kicker">ACTIVITIES &amp; PLAY</span>
+                  <button type="button" class="dropdown-link-item community-dialog-btn" data-community-tab="events"
+                    role="menuitem">
+                    <div class="link-item-text">
+                      <strong class="item-primary-title">Events &amp; Open Play</strong>
+                      <span class="item-secondary-desc">Weekly club mixers, training clinics &amp; round-robins</span>
+                    </div>
+                    <svg class="item-nav-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none"
+                      stroke="currentColor" stroke-width="2">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                  </button>
+
+                  <button type="button" class="dropdown-link-item community-dialog-btn" data-community-tab="groups"
+                    role="menuitem">
+                    <div class="link-item-text">
+                      <strong class="item-primary-title">Community Groups</strong>
+                      <span class="item-secondary-desc">Official player WhatsApp community &amp; discussions</span>
+                    </div>
+                    <svg class="item-nav-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none"
+                      stroke="currentColor" stroke-width="2">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- 3. UPDATES DROPDOWN -->
+          <li class="header-nav-item has-dropdown" data-dropdown="updates" role="none">
+            <button type="button" class="header-nav-btn" id="nav-btn-updates" aria-haspopup="true" aria-expanded="false"
+              role="menuitem">
+              <span class="nav-btn-text">UPDATES</span>
+              <svg class="nav-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+                stroke-width="2.5" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+
+            <!-- Refined Menu Panel -->
+            <div class="header-dropdown-panel" id="dropdown-updates" aria-labelledby="nav-btn-updates" role="menu">
+              <div class="dropdown-header-bar">
+                <span class="dropdown-header-sup">SERIES DESK</span>
+                <span class="dropdown-header-title">UPDATES</span>
+              </div>
+              <div class="dropdown-content-grid">
+                <div class="dropdown-col">
+                  <span class="dropdown-group-kicker">LATEST BULLETINS</span>
+                  <a href="#updates" class="dropdown-link-item" data-nav-target="updates" role="menuitem">
+                    <div class="link-item-text">
+                      <strong class="item-primary-title">Latest Updates</strong>
+                      <span class="item-secondary-desc">Series announcements and schedule notices</span>
+                    </div>
+                    <svg class="item-nav-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none"
+                      stroke="currentColor" stroke-width="2">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                  </a>
+
+                  <a href="#updates" class="dropdown-link-item" data-nav-target="updates" role="menuitem">
+                    <div class="link-item-text">
+                      <strong class="item-primary-title">Tournament News</strong>
+                      <span class="item-secondary-desc">Tournament 5 registration status &amp; prize purse</span>
+                    </div>
+                    <svg class="item-nav-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none"
+                      stroke="currentColor" stroke-width="2">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                  </a>
+                </div>
+
+                <div class="dropdown-col">
+                  <span class="dropdown-group-kicker">COMPETITION &amp; RULES</span>
+                  <a href="#updates" class="dropdown-link-item" data-nav-target="updates" role="menuitem">
+                    <div class="link-item-text">
+                      <strong class="item-primary-title">Official Announcements</strong>
+                      <span class="item-secondary-desc">Paddle inspection &amp; NVZ kitchen line rules</span>
+                    </div>
+                    <svg class="item-nav-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none"
+                      stroke="currentColor" stroke-width="2">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                  </a>
+
+                  <a href="#tournaments" class="dropdown-link-item" data-nav-target="tournaments" role="menuitem">
+                    <div class="link-item-text">
+                      <strong class="item-primary-title">Tournament Results</strong>
+                      <span class="item-secondary-desc">Championship scores and tournament champions</span>
+                    </div>
+                    <svg class="item-nav-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none"
+                      stroke="currentColor" stroke-width="2">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+
+        <!-- Mobile Menu Hamburger Button -->
+        <button type="button" class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation menu"
+          aria-expanded="false" aria-controls="mobile-nav-drawer">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+      </nav>
+
+    </div>
+
+    <!-- Mobile Drawer Navigation -->
+    <div class="mobile-nav-drawer" id="mobile-nav-drawer" aria-hidden="true">
+      <div class="mobile-drawer-inner">
+
+        <!-- Mobile Accordion 1: Tournaments -->
+        <div class="mobile-nav-group">
+          <button type="button" class="mobile-accordion-btn" data-accordion="mobile-tournaments" aria-expanded="false">
+            <span>TOURNAMENTS</span>
+            <svg class="mobile-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+              stroke-width="2.5">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="mobile-accordion-content" id="mobile-tournaments">
+            <a href="#points-tables" class="mobile-sublink" data-nav-target="points-tables">Points Table</a>
+            <a href="#stats" class="mobile-sublink" data-nav-target="stats">Series Stats</a>
+            <a href="#tournaments" class="mobile-sublink" data-nav-target="tournaments">Tournament Overview</a>
+            <a href="#updates" class="mobile-sublink" data-nav-target="updates">Upcoming Tournaments</a>
+            <a href="#tournaments" class="mobile-sublink" data-nav-target="tournaments">Past Tournaments</a>
+            <a href="#venues" class="mobile-sublink" data-nav-target="venues">Official Venues</a>
+          </div>
+        </div>
+
+        <!-- Mobile Accordion 2: Community -->
+        <div class="mobile-nav-group">
+          <button type="button" class="mobile-accordion-btn" data-accordion="mobile-community" aria-expanded="false">
+            <span>COMMUNITY</span>
+            <svg class="mobile-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+              stroke-width="2.5">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="mobile-accordion-content" id="mobile-community">
+            <button type="button" class="mobile-sublink community-dialog-btn" data-community-tab="overview">Community
+              Overview</button>
+            <button type="button" class="mobile-sublink community-dialog-btn" data-community-tab="players">Players &amp;
+              Teams</button>
+            <a href="#venues" class="mobile-sublink" data-nav-target="venues">Clubs &amp; Arenas</a>
+            <button type="button" class="mobile-sublink community-dialog-btn" data-community-tab="events">Events &amp;
+              Open Play</button>
+            <button type="button" class="mobile-sublink community-dialog-btn" data-community-tab="groups">Community
+              Groups</button>
+          </div>
+        </div>
+
+        <!-- Mobile Accordion 3: Updates -->
+        <div class="mobile-nav-group">
+          <button type="button" class="mobile-accordion-btn" data-accordion="mobile-updates" aria-expanded="false">
+            <span>UPDATES</span>
+            <svg class="mobile-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+              stroke-width="2.5">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="mobile-accordion-content" id="mobile-updates">
+            <a href="#updates" class="mobile-sublink" data-nav-target="updates">Latest Updates</a>
+            <a href="#updates" class="mobile-sublink" data-nav-target="updates">Tournament News</a>
+            <a href="#updates" class="mobile-sublink" data-nav-target="updates">Announcements</a>
+            <a href="#tournaments" class="mobile-sublink" data-nav-target="tournaments">Tournament Results</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="main-wrapper">
+    <!-- Page Header (The Crown Series Title Banner) -->
+    <section class="page-title-banner" aria-labelledby="main-heading">
+      <h1 id="main-heading" class="page-main-title">THE CROWN SERIES</h1>
+      <p class="page-sub-title">PICKLEBALL CHAMPIONSHIP </p>
+    </section>
+
+    <!-- Series Tab Navigation (Below Heading) -->
+    <nav class="series-nav-tabs" aria-label="Tournament navigation">
+      <a href="#points-tables" class="series-tab active" aria-current="page">Points Tables</a>
+      <a href="#stats" class="series-tab">Stats</a>
+      <a href="#tournaments" class="series-tab">Tournaments</a>
+      <a href="#venues" class="series-tab">Venues</a>
+      <a href="#updates" class="series-tab">Updates</a>
+    </nav>
+
+    <!-- Points Table Container -->
+    <div class="table-container-wrapper">
+      <section class="main-table-section" aria-label="Points Table Section">
+        <div class="table-card">
+          <!-- Toolbar with Search -->
+          <div class="table-card-toolbar">
+            <span class="table-summary-count" id="table-summary-count">Standings &bull; 24 Players</span>
+            <div class="search-wrapper">
+              <svg class="search-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="search-teams" class="search-input" placeholder="Search player name..."
+                aria-label="Search player name">
+            </div>
+          </div>
+
+          <!-- Points Table Responsive Container (Ref Image 1 & 2) -->
+          <div class="table-responsive-container">
+            <table class="points-table" id="pickleball-points-table"
+              aria-label="Pickleball Series Championship Points Table">
+              <thead>
+                <tr>
+                  <th scope="col" class="th-rank">Rank</th>
+                  <th scope="col" class="th-team">Player</th>
+                  <th scope="col" class="th-stat">Tournament</th>
+                  <th scope="col" class="th-stat">Games</th>
+                  <th scope="col" class="th-stat">Won</th>
+                  <th scope="col" class="th-stat">Loss</th>
+                  <th scope="col" class="th-points">Points</th>
+                  <th scope="col" class="th-expand" aria-label="Expand past matches"></th>
+                </tr>
+              </thead>
+              <tbody id="points-table-body">
+                <!-- Dynamically populated by app.js with accordion rows -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pagination Controls Container -->
+          <div id="pagination-container" class="pagination-wrapper"></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Dedicated Stats Analytics Section -->
+    <section id="stats-section" class="stats-section" style="display: none;" aria-label="Series Stats Analytics">
+    </section>
+
+    <!-- Dedicated Tournaments Schedule Section -->
+    <section id="tournaments-section" class="tournaments-section" style="display: none;"
+      aria-label="Tournament Schedule & Results"></section>
+
+    <!-- Dedicated Venues Section -->
+    <section id="venues-section" class="venues-section" style="display: none;" aria-label="Official Series Venues">
+    </section>
+
+    <!-- Dedicated Updates & Registrations Section -->
+    <section id="updates-section" class="updates-section" style="display: none;"
+      aria-label="Upcoming Tournament Registrations & Series Updates"></section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>&copy; 2026 The Crown Pickleball Championship &bull; The Racquet Club Ahmedabad. All rights reserved.</p>
+  </footer>
+
+  <!-- Community Network Interactive Modal Dialog -->
+  <div id="community-modal-backdrop" class="modal-backdrop" style="display: none;">
+    <div class="modal-card community-modal-card" role="dialog" aria-modal="true" aria-labelledby="comm-modal-title">
+      <div class="modal-header">
+        <div>
+          <span class="modal-sup-tag">THE RACQUET CLUB AHMEDABAD</span>
+          <h3 id="comm-modal-title" class="modal-heading">Community Network &amp; Player Hub</h3>
+        </div>
+        <button type="button" class="modal-close-btn" id="btn-close-comm-modal" aria-label="Close community modal">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="community-modal-nav">
+        <button type="button" class="comm-tab-btn active" data-tab="overview">Overview</button>
+        <button type="button" class="comm-tab-btn" data-tab="players">Players (24)</button>
+        <button type="button" class="comm-tab-btn" data-tab="events">Events &amp; Mixers</button>
+        <button type="button" class="comm-tab-btn" data-tab="groups">WhatsApp Groups</button>
+      </div>
+
+      <div class="community-modal-body" id="comm-modal-body">
+        <!-- Dynamically rendered by headerRenderer.js -->
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/app.js"></script>
+</body>
+
+</html>
